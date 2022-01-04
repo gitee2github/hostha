@@ -3,21 +3,36 @@
 #### 介绍
 Compute High Availability for OpenStack
 
-#### 软件架构
-软件架构说明
+项目通过在存储网、 数据网、管理网获取监控数据，然后对监控数据分析。
 
+当发生异常时，数据通过决策矩阵，得到要执行的动作，动作包括隔离 疏散等。
+
+支持下列场景下的虚拟机自动疏散
+* 节点掉电
+* 系统崩溃
+* 存储连接异常
+* 业务连接异常
+
+
+#### 软件架构
+![img.png](architecture.png)
+
+*说明*
+* 集群内节点（数目>3）通过consul 组成一个集群，提供监控数据，
+  manage(管理) tenant(业务) storage(存储) dc根据实际情况调整，不一定都需要
+* hostha 通过consulapi获取监控数据，当发生异常时，分析异常数据，通过决策矩阵，
+  得到执行的动作，并记录数据库，然后掉用openstack接口实现疏散
+* api提供节点信息配置，疏散记录查询等
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+参考 [INSTALL.md](INSTALL.md)
+
+后期考虑容器化便于快速部署
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+参考 [INSTALL.md](INSTALL.md)
 
 #### 参与贡献
 
